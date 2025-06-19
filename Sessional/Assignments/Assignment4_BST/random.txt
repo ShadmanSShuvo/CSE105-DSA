@@ -1,0 +1,31 @@
+remove
+
+if(key == root->key) {
+            Node* temp = root;
+            root = root->right;
+            delete temp;
+            return true;
+        }
+        Node* temp = root;
+        while (temp) {
+            if (key < temp->key) {
+                temp = temp->left;
+            } else if (key > temp->key) {
+                temp = temp->right;
+            }
+            else {
+                // Found the key, remove it
+                if (temp->left) {
+                    Node* to_delete = temp->left;
+                    temp->left = to_delete->right; // Adjust pointers
+                    delete to_delete;
+                } else if (temp->right) {
+                    Node* to_delete = temp->right;
+                    temp->right = to_delete->left; // Adjust pointers
+                    delete to_delete;
+                } else {
+                    delete temp; // Leaf node
+                }
+                return true; // Key removed successfully
+            }
+        }

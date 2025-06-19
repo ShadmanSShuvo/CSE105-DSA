@@ -8,7 +8,7 @@ url = "https://camo.githubusercontent.com/5fe6e11ac6d577c1975effeb415b0fb5254448
 hits = 1000  
 
 # Delay between requests (in seconds) — avoid detection or rate-limiting
-delay = .00001  
+delay = 0.000001  
 
 for i in range(hits):
     response = requests.get(url)
