@@ -1,4 +1,5 @@
 #include <iostream>
+//#include <string.h>
 #include <fstream>
 #include "listBST.hpp"
 
@@ -38,53 +39,74 @@ int main(int argc, char **argv)
             {
             case 'I':
                 in_file >> val;
-                if (bst->insert(val, val))
+                if(bst->insert(val, val))
                     cout << "Key " << val << " inserted into BST, ";
                 else
                     cout << "Insertion failed! Key " << val << " already exists in BST, ";
-
+                     
                 bst->print('D');
                 break;
 
             case 'D':
                 in_file >> val;
-                if (bst->remove(val))
+                if(bst->remove(val))
                     cout << "Key " << val << " removed from BST, ";
                 else
-                    cout << "Removal failed! Key " << val << " not found in BST, ";
-
+                    cout << "Removal failed! Key " << val << " not found in BST, "; 
+                
                 bst->print('D');
                 break;
 
             case 'E':
                 if (bst->empty())
+                {
                     cout << "Empty\n";
-
+                }
                 else
+                {
                     cout << "Not empty\n";
-
+                }
                 break;
             case 'M':
                 in_file >> str;
-                if (str[0] == 'M' and str[1] == 'i' and str[2] == 'n')
-                    cout << "Minimum value: " << bst->find_min() << "\n";
-
-                else if (str[0] == 'M' and str[1] == 'a' and str[2] == 'x')
-                    cout << "Maximum value: " << bst->find_max() << "\n";
-
+                if (strcmp(str, "min") == 0 || strcmp(str, "Min") == 0)
+                {
+                    try
+                    {
+                        cout << "Minimum value: " << bst->find_min() << "\n";
+                    }
+                    catch (const runtime_error &e)
+                    {
+                        cout << e.what() << "\n";
+                    }
+                }
+                else if (strcmp(str, "max") == 0 || strcmp(str, "Max") == 0)
+                {
+                    try
+                    {
+                        cout << "Maximum value: " << bst->find_max() << "\n";
+                    }
+                    catch (const runtime_error &e)
+                    {
+                        cout << e.what() << "\n";
+                    }
+                }
                 else
+                {
                     cout << "Invalid command: " << str << "\n";
-
+                }
                 break;
 
             case 'F':
                 in_file >> val;
                 if (bst->find(val))
+                {
                     cout << "Key " << val << " found in BST.\n";
-
+                }
                 else
+                {
                     cout << "Key " << val << " not found in BST.\n";
-
+                }
                 break;
 
             case 'P':
@@ -96,23 +118,29 @@ int main(int argc, char **argv)
                 break;
             case 'T':
                 in_file >> str;
-                if (str[0] == 'I' and str[1] == 'n')
+                if (strcmp(str, "in") == 0 || strcmp(str, "In") == 0)
+                {
                     bst->print('I');
-
-                else if (str[0] == 'P' and str[1] == 'r' and str[2] == 'e')
+                }
+                else if (strcmp(str, "pre") == 0 || strcmp(str, "Pre") == 0)
+                {
                     bst->print('P');
-
-                else if (str[0] == 'P' and str[1] == 'o' and str[2] == 's' and str[3] == 't')
+                }
+                else if (strcmp(str, "post") == 0 || strcmp(str, "Post") == 0)
+                {
                     bst->print('O');
-
+                }
+                else if (strcmp(str, "default") == 0 || strcmp(str, "Default") == 0)
+                {
+                    bst->print('D');
+                }
                 else
+                {
                     cout << "Invalid traversal type: " << str << "\n";
-
+                }
                 break;
             }
-        }
-        catch (const std::exception &e)
-        {
+        }catch (const std::exception& e) {
             cout << e.what() << endl;
         }
 
