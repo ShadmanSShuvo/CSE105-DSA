@@ -43,20 +43,14 @@ private:
             return new Node(key, value);
         }
         if (key < node->key)
-        {
             node->left = insert_helper(node->left, key, value);
-        }
-        else if (key > node->key)
-        {
-            node->right = insert_helper(node->right, key, value);
-        }
-        else
-        {
-            return nullptr;
-            // throw std::runtime_error("Insertion failed! Key already exists in BST,");
 
-            // node->value = value; // Update value if key exists
-        }
+        else if (key > node->key)
+            node->right = insert_helper(node->right, key, value);
+
+        else
+            return nullptr;
+
         return node;
     }
 
@@ -79,13 +73,11 @@ private:
         if (!node)
             return nullptr;
         if (key < node->key)
-        {
             node->left = remove_helper(node->left, key);
-        }
+
         else if (key > node->key)
-        {
             node->right = remove_helper(node->right, key);
-        }
+
         else
         {
             if (!node->left)
